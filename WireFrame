@@ -1,0 +1,40 @@
+echo "# SampleDeFiAppPolygonAaveArc" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/iantstaley/SampleDeFiAppPolygonAaveArc.git
+git push -u origin main
+pragma solidity ^0.8.0;
+
+import {Aave, Arc} from "https://github.com/aave/aave-protocol-contracts/contracts";
+
+contract DeFiApp {
+    Aave aave;
+    Arc arc;
+
+    constructor() public {
+        aave = Aave(address(0x742d35Cc6634C0532925a3b844Bc454e4438f44e));
+        arc = Arc(address(0x9E77D5a1251b6F7D456722A6eAC6D2d5980bd891));
+    }
+
+    function deposit(address user, uint256 amount) public {
+        aave.deposit(user, amount);
+    }
+
+    function borrow(address user, uint256 amount) public {
+        aave.borrow(user, amount);
+    }
+
+    function repay(address user, uint256 amount) public {
+        aave.repay(user, amount);
+    }
+
+    function redeem(address user, uint256 amount) public {
+        aave.redeem(user, amount);
+    }
+
+    function transfer(address from, address to, uint256 amount) public {
+        arc.transfer(from, to, amount);
+    }
+}
